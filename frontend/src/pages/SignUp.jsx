@@ -1,15 +1,32 @@
-import React from 'react'
+
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
-import { nanoid } from 'nanoid' // ✅ correct import
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { nanoid } from 'nanoid'
+import { useDispatch } from 'react-redux'
+import { asyncregisterUser } from '../store/actions/userAction.jsx'
+
 
 const SignUp = () => {
+  const dispatch = useDispatch()
+  const Navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const onSubmit = (data) => {
-    const userId = nanoid()
-    console.log('New User ID:', userId)
-    console.log('Sign Up Data:', data)
+  
+    const user = {
+      id: nanoid(),
+      
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      isAdmin: false,
+    }
+    Navigate("/signin")
+
+    console.log('Sign Up Data:', user)
+
+    // dispatch the async action
+    dispatch(asyncregisterUser(user))
   }
 
   return (
@@ -32,9 +49,7 @@ const SignUp = () => {
                 errors.name ? 'border-red-500' : 'border-gray-600'
               }`}
             />
-            {errors.name && (
-              <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
-            )}
+            {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
           </div>
 
           {/* Email */}
@@ -54,9 +69,7 @@ const SignUp = () => {
                 errors.email ? 'border-red-500' : 'border-gray-600'
               }`}
             />
-            {errors.email && (
-              <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
-            )}
+            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
           </div>
 
           {/* Password */}
@@ -67,18 +80,13 @@ const SignUp = () => {
               placeholder="Enter your password"
               {...register('password', {
                 required: 'Password is required',
-                minLength: {
-                  value: 6,
-                  message: 'Password must be at least 6 characters',
-                },
+                minLength: { value: 6, message: 'Password must be at least 6 characters' },
               })}
               className={`w-full px-4 py-2 border rounded-xl bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white ${
                 errors.password ? 'border-red-500' : 'border-gray-600'
               }`}
             />
-            {errors.password && (
-              <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
-            )}
+            {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
           </div>
 
           {/* Submit */}
