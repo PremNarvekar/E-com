@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "id": 0,
+            "username": "string",
+            "email": "string",
+            "password": "string"
+        }
+    ],
+    "products": [
+        {
+            "id": "1",
+            "title": "Cool Hoodie",
+            "price": "49.99",
+            "description": "Premium cotton hoodie with modern fit and soft interior.",
+            "category": "fashion",
+            "image": "https://example.com/images/hoodie.png"
+        }
+    ],
+
+    "cart":[] 
+
+
+
+
+}
