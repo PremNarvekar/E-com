@@ -1,7 +1,9 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
 import { nanoid } from 'nanoid'
 import { Link } from 'react-router-dom'
+import { asyncsigninUser } from '../store/actions/userAction'
+import { useDispatch } from 'react-redux'
+
 
 const SignIn = () => {
   const {
@@ -11,9 +13,11 @@ const SignIn = () => {
     reset,
   } = useForm()
 
+  const dispatch = useDispatch()
   const onSubmit = (data) => {
     const sessionId = nanoid()
     const formData = { ...data, sessionId }
+    dispatch(asyncsigninUser(data))
 
     console.log('✅ Sign-In Successful:', formData)
 
