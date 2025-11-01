@@ -1,22 +1,18 @@
-import { Routes  , Route} from "react-router-dom"
-import Home from "../pages/Home.jsx"
-import Product from "../pages/Products.jsx"
-import SignIn from "../pages/SignIn.jsx"
-import SignUp from "../pages/SignUp.jsx"
+import { Routes, Route } from "react-router-dom"
+import Home from "./pages/Home"
+import Products from "./pages/Products"
+import CreateProduct from "./pages/CreateProduct"
+import SignIn from "./pages/SignIn"
 
-
-
-
-const Mainroutes = () => {
+const MainRoutes = () => {
   return (
     <Routes>
-        <Route path="/" element={<Home />}  />
-        <Route path="/products" element={<Product />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        
+      <Route path="/" element={<Home />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/create" element={<CreateProduct />} />
+      <Route path="/signin" element={<SignIn />} />
     </Routes>
   )
 }
 
-export default Mainroutes
+export default MainRoutes
